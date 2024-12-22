@@ -1,3 +1,17 @@
+<script setup lang="ts">
+const { $anime } = useNuxtApp()
+
+onMounted(() => {
+    $anime({
+        targets: ".header",
+        translateX: [-100, 0],
+        opacity: [0, 1],
+        delay: 200,
+        duration: 1000
+    })
+})
+</script>
+
 <template>
     <header class="header">
         <nav class="header__navigation">
