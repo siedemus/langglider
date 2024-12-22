@@ -7,7 +7,8 @@ onMounted(() => {
         translateX: [-100, 0],
         opacity: [0, 1],
         delay: 200,
-        duration: 1000
+        duration: 1000,
+        easing: "easeInOutBack"
     })
 })
 </script>
