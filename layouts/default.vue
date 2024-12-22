@@ -6,7 +6,7 @@ onMounted(() => {
         targets: ".header",
         translateX: [-100, 0],
         opacity: [0, 1],
-        delay: 200,
+        delay: 100,
         duration: 1000,
         easing: "easeInOutBack"
     })
