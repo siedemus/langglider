@@ -3,6 +3,7 @@ export default defineNuxtConfig({
 	compatibilityDate: "2024-11-01",
 	devtools: { enabled: true },
 	css: ["public/css/main.css"],
+	modules: ["@nuxtjs/google-fonts", "@hypernym/nuxt-anime"],
 
 	app: {
 		head: {
@@ -14,7 +15,6 @@ export default defineNuxtConfig({
 		},
 	},
 
-	modules: ["@nuxtjs/google-fonts"],
 	googleFonts: {
 		families: {
 			"Funnel Display": [400, 500, 600, 700],
