@@ -1,9 +1,14 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-	compatibilityDate: "2024-11-01",
-	devtools: { enabled: true },
 	css: ["assets/css/main.css"],
-	modules: ["@nuxtjs/google-fonts", "@hypernym/nuxt-anime"],
+	modules: ["@nuxtjs/google-fonts", "@hypernym/nuxt-anime", "@nuxtjs/supabase"],
+
+	supabase: {
+		url: process.env.NUXT_PUBLIC_SUPABASE_URL,
+		key: process.env.SUPABASE_KEY,
+		serviceKey: process.env.SUPABASE_SERVICE_ROLE,
+		redirect: false
+	},
 
 	app: {
 		head: {
@@ -24,4 +29,7 @@ export default defineNuxtConfig({
 		download: true,
 		base64: false,
 	},
+
+	compatibilityDate: "2024-11-01",
+	devtools: { enabled: true },
 });
