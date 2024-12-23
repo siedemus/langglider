@@ -4,7 +4,7 @@ const { $anime } = useNuxtApp()
 onMounted(() => {
     $anime({
         targets: ".header",
-        translateX: [-100, 0],
+        translateY: [-100, 0],
         opacity: [0, 1],
         delay: 100,
         duration: 1000,
@@ -17,7 +17,7 @@ onMounted(() => {
     <header class="header">
         <nav class="header__navigation">
             <NuxtLink href="/" class="header__link">
-                <img class="header__logo" src="public/images/logo.png" />
+                <img class="header__logo" src="assets/images/logo.png" alt="flying squirrel logo" />
                 <span class="header__span">LanGGlider</span>
             </NuxtLink>
             <div class="header__hamburger">
