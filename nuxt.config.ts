@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
 	compatibilityDate: "2024-11-01",
 	devtools: { enabled: true },
-	css: ["public/css/main.css"],
+	css: ["assets/css/main.css"],
 	modules: ["@nuxtjs/google-fonts", "@hypernym/nuxt-anime"],
 
 	app: {
@@ -17,7 +17,7 @@ export default defineNuxtConfig({
 
 	googleFonts: {
 		families: {
-			"Funnel Display": [400, 500, 600, 700],
+			"Funnel Display": [400, 500, 600, 700, 800],
 		},
 		display: "swap",
 		preload: true,
