@@ -211,34 +211,4 @@ import Tile from "~/components/ui/Tile/index.vue"
         transform: translate(25%, 25%);
     }
 }
-
-@keyframes bounce {
-    70% {
-        transform: translateY(0%);
-    }
-
-    75% {
-        transform: translateY(-15%);
-    }
-
-    80% {
-        transform: translateY(0%);
-    }
-
-    85% {
-        transform: translateY(-7%);
-    }
-
-    90% {
-        transform: translateY(0%);
-    }
-
-    95% {
-        transform: translateY(-5%);
-    }
-
-    100% {
-        transform: translateY(0);
-    }
-}
 </style>
