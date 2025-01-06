@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const { appUrl } = useRuntimeConfig().public
-
 import Tile from "~/components/ui/Tile/index.vue"
 </script>
 
