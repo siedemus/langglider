@@ -1,0 +1,18 @@
+.form__message {
+  background-color: rgb(15, 15, 15, 0.3);
+  box-shadow: 0 0 3px rgba(36, 36, 36, 0.7);
+  border-radius: 0.5rem;
+  padding: 0.8rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.form__message--red {
+  color: rgb(255, 0, 0);
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+}
+
+.form__message--teal {
+  color: rgb(0, 255, 179);
+  text-shadow: 0 0 10px rgba(0, 255, 179, 0.7);
+}
