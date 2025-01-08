@@ -90,7 +90,6 @@ const initializeAnimations = () => {
     if (!welcomeTitleRef.value) return
 
     gsap.set(welcomeTitleRef.value, {
-        opacity: 0,
         x: 200,
         ...ANIMATION_CONFIG
     });
@@ -155,6 +154,10 @@ watch(selectedOption, () => {
 .transparent-section__title {
     position: absolute;
     inset: 0;
+}
+
+.transparent-section__title:nth-child(even) {
+    opacity: 0;
 }
 
 .transparent-section__container {
