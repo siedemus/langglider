@@ -35,8 +35,8 @@
             </div>
         </section>
         <section v-else class="transparent-section">
-            <h1 class="section__header">You are already logged in.</h1>
-            <NuxtLink href="/" class="section__homeLink">Go to Home</NuxtLink>
+            <h1 class="transparent-section__header">You are already logged in.</h1>
+            <NuxtLink href="/" class="transparent-section__homeLink">Go to Home</NuxtLink>
         </section>
     </main>
 </template>
