@@ -42,7 +42,6 @@
 
 <script setup lang="ts">
 import { gsap } from 'gsap';
-import googleImage from "~/assets/images/google.svg";
 import discordImage from "~/assets/images/discord.svg";
 
 type Option = typeof options[number];
@@ -52,7 +51,7 @@ interface AnimationConfig {
 }
 
 const { loading, message, errorMessage, isAuthenticated, signUp, signInWithPassword, signInWithOAuth } = useAuth();
-const oAuthOptions = { "google": googleImage, "discord": discordImage };
+const oAuthOptions = { "discord": discordImage };
 const email = ref("");
 const password = ref("");
 

@@ -1,4 +1,4 @@
-type AvailableProvider = "google" | "discord"
+type AvailableProvider = "discord"
 type Error = null | string
 type Message = null | string
 
@@ -27,7 +27,7 @@ export const useAuth = () => {
 
             if (error) throw error;
 
-            message.value = "Check your email for verification link";
+            message.value = "Please check your email for a verification link. It may take a few minutes to arrive. If you don't receive it, check your spam folder or try logging in if you already have an account.";
         } catch (error: any) {
             errorMessage.value = error.message
         } finally {
@@ -79,8 +79,6 @@ export const useAuth = () => {
             })
 
             if (error) throw error
-
-            router.push("/")
         } catch (error: any) {
             errorMessage.value = error.message
         } finally {
@@ -98,7 +96,7 @@ export const useAuth = () => {
 
             if (error) throw error
 
-            message.value = "Check your email for password change link";
+            message.value = "Please check your email for a secure password reset link.";
         } catch (error: any) {
             errorMessage.value = error.message
         } finally {
