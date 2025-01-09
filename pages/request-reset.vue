@@ -6,10 +6,10 @@
             </h1>
             <form class="transparent-section__form" @submit.prevent="requestPasswordChange(email)">
                 <input :disabled="loading" type="email" class="form__input" placeholder="Email" v-model="email" />
-                <NuxtLink class="green-link" href="/login">Login Page</NuxtLink>
                 <button class="form__button" type="submit">{{ loading ? "Processing..." : "Submit" }}</button>
                 <p v-if="message" class="form__message form__message--teal">{{ message }}</p>
                 <p v-if="errorMessage" class="form__message form__message--red">ERROR: {{ errorMessage }}</p>
+                <NuxtLink href="/" class="transparent-section__homeLink">Go to Home</NuxtLink>
             </form>
         </section>
     </div>
@@ -45,5 +45,21 @@ const { loading, errorMessage, message, requestPasswordChange } = useAuth();
     display: flex;
     flex-direction: column;
     gap: 1rem;
+}
+
+.transparent-section__homeLink {
+    background-color: rgba(0, 255, 179, 0.7);
+    color: inherit;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 0.5rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+
+    &:hover {
+        background-color: rgb(255, 255, 255, 0.2);
+    }
 }
 </style>

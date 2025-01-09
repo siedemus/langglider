@@ -89,9 +89,10 @@ export const useAuth = () => {
     const requestPasswordChange = async (email: string) => {
         try {
             loading.value = true
+            messageCleanUp()
 
             const { error } = await auth.resetPasswordForEmail(email, {
-                redirectTo: `${env.appUrl}/reset`
+                redirectTo: `${env.appUrl}/reset-password`
             })
 
             if (error) throw error
@@ -104,6 +105,23 @@ export const useAuth = () => {
         }
     };
 
+    const updatePassword = async (newPassword: string) => {
+        try {
+            loading.value = true;
+            messageCleanUp()
+
+            const { error } = await auth.updateUser({ password: newPassword });
+
+            if (error) throw error;
+
+            message.value = "Successfully updated your password."
+        } catch (error: any) {
+            errorMessage.value = error.message;
+        } finally {
+            loading.value = false;
+        }
+    }
+
     return {
         loading,
         message,
@@ -113,6 +131,7 @@ export const useAuth = () => {
         signInWithPassword,
         signInWithOAuth,
         signOut,
-        requestPasswordChange
+        requestPasswordChange,
+        updatePassword
     };
 };

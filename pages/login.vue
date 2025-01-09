@@ -16,7 +16,7 @@
                 <input :disabled="loading" type="email" class="form__input" placeholder="Email" v-model="email" />
                 <input :disabled="loading" type="password" class="form__input" placeholder="Password"
                     v-model="password" />
-                <NuxtLink href="/reset" class="green-link">Password Reset</NuxtLink>
+                <NuxtLink href="/request-reset" class="green-link">Password Reset</NuxtLink>
                 <button :disabled="loading" type="submit" class="form__button">{{ loading ? "Processing..." : "Submit"
                     }}</button>
                 <p v-if="message" class="form__message form__message--teal">{{ message }}</p>
