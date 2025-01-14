@@ -13,42 +13,6 @@
             </div>
         </nav>
         <main class="main">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam itaque quidem rerum ea beatae, totam
-                dicta officiis labore accusantium corporis iure praesentium. Omnis perspiciatis amet cupiditate
-                repudiandae. Repellendus, ipsam unde.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam itaque quidem rerum ea beatae, totam
-                dicta officiis labore accusantium corporis iure praesentium. Omnis perspiciatis amet cupiditate
-                repudiandae. Repellendus, ipsam unde.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam itaque quidem rerum ea beatae, totam
-                dicta officiis labore accusantium corporis iure praesentium. Omnis perspiciatis amet cupiditate
-                repudiandae. Repellendus, ipsam unde.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam itaque quidem rerum ea beatae, totam
-                dicta officiis labore accusantium corporis iure praesentium. Omnis perspiciatis amet cupiditate
-                repudiandae. Repellendus, ipsam unde.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam itaque quidem rerum ea beatae, totam
-                dicta officiis labore accusantium corporis iure praesentium. Omnis perspiciatis amet cupiditate
-                repudiandae. Repellendus, ipsam unde.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam itaque quidem rerum ea beatae, totam
-                dicta officiis labore accusantium corporis iure praesentium. Omnis perspiciatis amet cupiditate
-                repudiandae. Repellendus, ipsam unde.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam itaque quidem rerum ea beatae, totam
-                dicta officiis labore accusantium corporis iure praesentium. Omnis perspiciatis amet cupiditate
-                repudiandae. Repellendus, ipsam unde.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam itaque quidem rerum ea beatae, totam
-                dicta officiis labore accusantium corporis iure praesentium. Omnis perspiciatis amet cupiditate
-                repudiandae. Repellendus, ipsam unde.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam itaque quidem rerum ea beatae, totam
-                dicta officiis labore accusantium corporis iure praesentium. Omnis perspiciatis amet cupiditate
-                repudiandae. Repellendus, ipsam unde.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam itaque quidem rerum ea beatae, totam
-                dicta officiis labore accusantium corporis iure praesentium. Omnis perspiciatis amet cupiditate
-                repudiandae. Repellendus, ipsam unde.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam itaque quidem rerum ea beatae, totam
-                dicta officiis labore accusantium corporis iure praesentium. Omnis perspiciatis amet cupiditate
-                repudiandae. Repellendus, ipsam unde.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam itaque quidem rerum ea beatae, totam
-                dicta officiis labore accusantium corporis iure praesentium. Omnis perspiciatis amet cupiditate
-                repudiandae. Repellendus, ipsam unde.</p>
         </main>
     </div>
 </template>
