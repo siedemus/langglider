@@ -1,20 +1,22 @@
 <template>
-    <div class="gradient-background">
-        <nav class="sidebar" ref="sidebarRef">
-            <div class="sidebar__content">
-                <h1 class="content__header">LanGGlider</h1>
+    <nav class="sidebar" ref="sidebarRef">
+        <div class="sidebar__content">
+            <h1 class="content__header">LanGGlider</h1>
+            <div class="content__link-container">
+                <NuxtLink class="content__link" href="/dashboard/create">Create Flascards</NuxtLink>
+                <NuxtLink class="content__link" href="/dashboard/create-ai">Create Flascards with AI</NuxtLink>
             </div>
-            <div class="sidebar__menu">
-                <button class="menu__button" @click="changeSidebarVisibility">
-                    <div class="button__line" />
-                    <div class="button__line" />
-                    <div class="button__line" />
-                </button>
-            </div>
-        </nav>
-        <main class="main">
-        </main>
-    </div>
+            <h2 class="content__header">Flashcard Sets</h2>
+        </div>
+        <div class="sidebar__menu">
+            <button class="menu__button" @click="changeSidebarVisibility">
+                <div class="button__line" />
+                <div class="button__line" />
+                <div class="button__line" />
+            </button>
+        </div>
+    </nav>
+    <slot />
 </template>
 
 <script lang="ts" setup>
@@ -37,7 +39,9 @@ const initializeAnimation = () => {
 
 const animateSidebar = () => {
     gsap.to(sidebarRef.value, {
-        x: isSidebarOpen.value ? "0" : "-85%"
+        x: isSidebarOpen.value ? "0" : "-85%",
+        duration: 0.3,
+        ease: "power2.inOut"
     })
 }
 
@@ -51,26 +55,51 @@ onMounted(() => {
 </script>
 
 <style lang="css" scoped>
-@import url("~/assets/css/gradient-background.css");
-
 .sidebar {
     background-color: rgb(15, 15, 15);
     width: 300px;
     min-height: 100vh;
     display: flex;
     position: absolute;
+    z-index: 1;
 }
 
 .sidebar__content {
     width: 85%;
     max-height: 100vh;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .content__header {
     margin: 0;
     border-bottom: 2px solid rgba(231, 231, 231, 0.2);
     padding: 0.5rem 0 0.5rem 0.5rem;
+}
+
+.content__link-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem 0 0;
+    gap: 0.5rem;
+}
+
+.content__link {
+    text-align: center;
+    width: 90%;
+    padding: 0.5rem 0;
+    border-radius: 7px;
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+    border: solid 2px rgba(231, 231, 231, 0.2);
+
+    &:hover {
+        background-color: rgba(231, 231, 231, 0.2);
+    }
 }
 
 .sidebar__menu {
@@ -103,12 +132,5 @@ onMounted(() => {
     width: 25px;
     height: 3px;
     border-radius: 7px;
-}
-
-.main {
-    padding-left: 55px;
-    max-width: calc(100vw - 35px);
-    max-height: 100vh;
-    overflow-y: auto;
 }
 </style>
