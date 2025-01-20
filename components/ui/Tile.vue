@@ -20,8 +20,8 @@ const onMouseMove = (e: MouseEvent) => {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top
 
-    card.style.setProperty("--x", `${x}px`)
-    card.style.setProperty("--y", `${y}px`)
+    card.style.setProperty("--tile-x", `${x}px`)
+    card.style.setProperty("--tile-y", `${y}px`)
 }
 </script>
 
@@ -29,10 +29,10 @@ const onMouseMove = (e: MouseEvent) => {
 .tile {
     position: relative;
     padding: 1rem;
-    background-color: rgb(255, 255, 255, 0.2);
+    background-color: var(--transparent-gray);
     border-radius: 0.5rem;
     overflow: hidden;
-    transition: all 300ms;
+    transition: all 300ms ease;
 }
 
 .tile:hover {
@@ -44,11 +44,11 @@ const onMouseMove = (e: MouseEvent) => {
     position: absolute;
     width: 300px;
     height: 300px;
-    top: var(--y);
-    left: var(--x);
+    top: var(--tile-y);
+    left: var(--tile-x);
     transform: translate(-50%, -50%) scale(2);
-    background: radial-gradient(rgba(224, 224, 224, 0.3), transparent, transparent);
-    transition: opacity 0.3s ease-out;
+    background: radial-gradient(var(--transparent-white), transparent, transparent);
+    transition: opacity 300ms ease-out;
     opacity: 0;
 }
 
@@ -57,16 +57,13 @@ const onMouseMove = (e: MouseEvent) => {
 }
 
 .tile__header {
-    color: white;
     margin: 0 0 0.2rem;
+    line-height: 1;
     font-weight: 800;
     font-size: 1.8rem;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
 }
 
 .tile__text {
     font-size: 1.2rem;
-    font-weight: 400;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
 }
 </style>
