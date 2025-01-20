@@ -13,7 +13,7 @@ definePageMeta({
 </script>
 
 <style lang="css" scoped>
-@import url("~/assets/css/gradient-background.css");
+
 
 .main {
     padding-left: 50px;

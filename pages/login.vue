@@ -131,7 +131,6 @@ watch(selectedOption, () => {
 </script>
 
 <style lang="css" scoped>
-@import url("~/assets/css/gradient-background.css");
 @import url("~/assets/css/transparent-section.css");
 @import url("~/assets/css/green-link.css");
 

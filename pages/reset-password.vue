@@ -31,7 +31,6 @@ const expired = route.query.error_code as string === "otp_expired"
 </script>
 
 <style lang="css" scoped>
-@import url("~/assets/css/gradient-background.css");
 @import url("~/assets/css/transparent-section.css");
 
 @import url("~/assets/css/form/input.css");
