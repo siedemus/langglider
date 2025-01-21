@@ -17,9 +17,8 @@
 <script setup lang="ts">
 import type { FormProps } from '~/components/Form.vue';
 
-const email = ref("");
-
 const { loading, errorMessage, message, requestPasswordChange } = useAuth();
+const email = ref("");
 
 const inputs: FormProps["inputs"] = [
     {
