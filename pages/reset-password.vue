@@ -6,9 +6,9 @@
             </template>
             <template #content>
                 <Form v-if="!expired" :loading="loading" :submit-func="submitForm" :inputs="inputs" />
+                <UiLink href="/">Go to Home</UiLink>
                 <UiMessageBox variant="Success" v-if="message">{{ message }}</UiMessageBox>
                 <UiMessageBox variant="Error" v-if="errorMessage">{{ errorMessage }}</UiMessageBox>
-                <UiLink href="/">Go to Home</UiLink>
             </template>
         </UiTransparentContainer>
     </main>
