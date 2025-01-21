@@ -4,15 +4,18 @@
   --dark: rgb(29, 29, 29);
   --cherry: rgb(255, 0, 128);
   --lime: rgb(0, 255, 179);
+  --red: rgb(255, 0, 0);
 
   /* Transparent Colors */
   --transparent-dark: rgb(29, 29, 29, 0.7);
   --transparent-gray: rgb(255, 255, 255, 0.1);
   --transparent-white: rgba(224, 224, 224, 0.3);
+  --transparent-lime: rgb(0, 255, 179, 0.7);
 
   /* Shadows */
   --shadow-dark: 0 0 8px rgb(29, 29, 29, 0.7);
   --shadow-white: 0 0 10px rgb(255, 255, 255, 0.7);
+  --shadow-lime: 0 0 10px rgba(0, 255, 179, 0.9);
 }
 
 * {
