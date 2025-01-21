@@ -1,5 +1,5 @@
 <template>
-    <NuxtLink :href="href" :style="maxWidth ? { maxWidth: maxWidth + 'px' } : {}" class="button-link">
+    <NuxtLink class="button-link" :href="href" :style="maxWidth ? { maxWidth: maxWidth + 'px', width: '100%' } : {}">
         <slot />
     </NuxtLink>
 </template>
@@ -13,8 +13,6 @@ const { href, maxWidth } = defineProps<ButtonProps>()
 <style lang="css" scoped>
 .button-link {
     font-size: clamp(1rem, 5vw, 1.2rem);
-    max-width: 100%;
-    width: 100%;
     display: inline-block;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -32,7 +30,6 @@ const { href, maxWidth } = defineProps<ButtonProps>()
 
     &:hover {
         transform: scale(1.01) translateY(-2px);
-        filter: brightness(0.95);
         box-shadow: var(--shadow-white);
     }
 }

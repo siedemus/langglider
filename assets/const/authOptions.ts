@@ -1,0 +1,1 @@
+export const options = ["Sign Up", "Sign In"] as const;

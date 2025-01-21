@@ -1,95 +1,110 @@
 <template>
-    <main class="gradient-background">
-        <section v-if="!isAuthenticated" class="transparent-section">
-            <h1 class="transparent-section__header">
-                <span class="transparent-section__title" ref="joinUsTitleRef">Join Us Today!</span>
-                <span class="transparent-section__title" ref="welcomeTitleRef">Welcome Back!</span>
-            </h1>
-            <div class="transparent-section__container">
-                <button :disabled="loading" v-for="option in options" @click="selectOption(option)"
-                    class="container__button">
-                    {{ option }}
-                </button>
-                <div class="container__mask" ref="maskRef" />
-            </div>
-            <form class="transparent-section__form" @submit.prevent="submitForm">
-                <input :disabled="loading" type="email" class="form__input" placeholder="Email" v-model="email" />
-                <input :disabled="loading" type="password" class="form__input" placeholder="Password"
-                    v-model="password" />
-                <NuxtLink href="/request-reset" class="green-link">Password Reset</NuxtLink>
-                <button :disabled="loading" type="submit" class="form__button">{{ loading ? "Processing..." : "Submit"
-                    }}</button>
-                <p v-if="message" class="form__message form__message--teal">{{ message }}</p>
-                <p v-if="errorMessage" class="form__message form__message--red">ERROR: {{ errorMessage }}</p>
-            </form>
-            <div class="section__separator">
-                <div class="separator__line" />
-                <span class="separator__span">or</span>
-                <div class="separator__line" />
-            </div>
-            <div class="section__oAuth">
-                <button :disabled="loading" v-for="(url, provider) in oAuthOptions" class="oAuth__button"
-                    @click="signInWithOAuth(provider)">
-                    <img class="oAuth__image" :src="url" />
-                </button>
-            </div>
-        </section>
-        <section v-else class="transparent-section">
-            <h1 class="transparent-section__header">You are already logged in.</h1>
-            <NuxtLink href="/" class="transparent-section__homeLink">Go to Home</NuxtLink>
-        </section>
+    <main class="main">
+        <UiTransparentContainer v-if="!isAuthenticated">
+            <template #header>
+                <span class="header__title" ref="joinUsRef">Join Us Today!</span>
+                <span class="header__title" ref="welcomeRef">Welcome Back!</span>
+            </template>
+            <template #content>
+                <div class="container">
+                    <button class="container__button" :disabled="loading" v-for="option in options"
+                        @click="selectOption(option)">
+                        {{ option }}
+                    </button>
+                    <div class="container__mask" ref="maskRef" />
+                </div>
+                <Form :submit-func="submitForm" :loading="loading" :inputs="formInputs" />
+                <UiLink href="/reset-password">
+                    Request password reset
+                </UiLink>
+                <div class="separator">
+                    <div class="separator__line" />
+                    <span class="separator__span">or</span>
+                    <div class="separator__line" />
+                </div>
+                <div class="oAuth">
+                    <button class="oAuth__button" :disabled="loading" v-for="(url, provider) in oAuthOptions"
+                        @click="signInWithOAuth(provider)">
+                        <img class="oAuth__image" :src="url" />
+                    </button>
+                </div>
+                <UiMessageBox variant="Success" v-if="message">{{ message }}</UiMessageBox>
+                <UiMessageBox variant="Error" v-if="errorMessage">{{ errorMessage }}</UiMessageBox>
+            </template>
+        </UiTransparentContainer>
+        <UiTransparentContainer v-else>
+            <template #header>
+                You are already logged in.
+            </template>
+            <template #content>
+                <UiButtonLink href="/">Go to Home</UiButtonLink>
+            </template>
+        </UiTransparentContainer>
     </main>
 </template>
 
 <script setup lang="ts">
-import { gsap } from 'gsap';
+import { LOGIN_ANIMATION_CONFIG as ANIMATION_CONFIG } from 'assets/const/animationConfigs';
+import type { FormProps } from '~/components/Form.vue';
 import { oAuthOptions } from '~/assets/const/oAuthOptions';
+import { options } from '~/assets/const/authOptions';
+import { gsap } from 'gsap';
 
-// TYPES
 
-type Option = typeof options[number];
-interface AnimationConfig {
-    duration: number;
-    ease: string;
-}
+// AUTH & FORM
 
-// AUTH
+const {
+    loading,
+    message,
+    errorMessage,
+    isAuthenticated,
+    signUp,
+    signInWithPassword,
+    signInWithOAuth
+} = useAuth();
 
-const { loading, message, errorMessage, isAuthenticated, signUp, signInWithPassword, signInWithOAuth } = useAuth();
-const email = ref("");
-const password = ref("");
+const formState = reactive({
+    email: "",
+    password: ""
+})
 
-const submitForm = async () => {
-    if (selectedOption.value === "Sign Up") {
-        await signUp(email.value, password.value);
-        email.value = "";
-        password.value = "";
-    } else {
-        await signInWithPassword(email.value, password.value);
-    };
-};
+const formInputs: FormProps["inputs"] = [
+    {
+        attributes: { type: "email", placeholder: "Insert email" },
+        vModel: { value: formState.email, updateValue: (value: string) => formState.email = value }
+    },
+    {
+        attributes: { type: "password", placeholder: "Insert password" },
+        vModel: { value: formState.password, updateValue: (value: string) => formState.password = value }
+    }
+];
 
-// ANIMATIONS & AUTH OPTIONS
-
-const options = ["Sign Up", "Sign In"] as const;
-const maskPositions = { "Sign Up": "0%", "Sign In": "100%" } as const;
-const selectedOption = ref<Option>("Sign Up");
-const maskRef = ref<null | HTMLDivElement>(null);
-const welcomeTitleRef = ref<null | HTMLSpanElement>(null);
-const joinUsTitleRef = ref<null | HTMLSpanElement>(null);
-const ANIMATION_CONFIG: AnimationConfig = {
-    duration: 0.3,
-    ease: "power2.inOut"
-} as const;
-
-const selectOption = (option: Option) => {
+const selectedOption = ref<typeof options[number]>("Sign Up");
+const selectOption = (option: typeof options[number]) => {
     selectedOption.value = option;
 };
 
-const initializeAnimations = () => {
-    if (!welcomeTitleRef.value) return
+const submitForm = async () => {
+    if (selectedOption.value === "Sign Up") {
+        await signUp(formState.email, formState.password);
+        formState.email = "";
+        formState.password = "";
+    } else {
+        await signInWithPassword(formState.email, formState.password);
+    };
+};
 
-    gsap.set(welcomeTitleRef.value, {
+// ANIMATIONS
+
+const maskPositions = { "Sign Up": "0%", "Sign In": "100%" } as const;
+const maskRef = ref<null | HTMLDivElement>(null);
+const welcomeRef = ref<null | HTMLSpanElement>(null);
+const joinUsRef = ref<null | HTMLSpanElement>(null);
+
+const initializeAnimations = () => {
+    if (!welcomeRef.value) return
+
+    gsap.set(welcomeRef.value, {
         x: 200,
         ...ANIMATION_CONFIG
     });
@@ -105,65 +120,52 @@ const animateMask = () => {
 };
 
 const animateTitles = () => {
-    if (!welcomeTitleRef || !joinUsTitleRef) return
+    if (!welcomeRef || !joinUsRef) return
 
-    gsap.to(welcomeTitleRef.value, {
+    gsap.to(welcomeRef.value, {
         opacity: selectedOption.value === "Sign Up" ? 0 : 1,
         x: selectedOption.value === "Sign Up" ? 200 : 0,
         ...ANIMATION_CONFIG
     })
 
-    gsap.to(joinUsTitleRef.value, {
+    gsap.to(joinUsRef.value, {
         opacity: selectedOption.value === "Sign Up" ? 1 : 0,
         x: selectedOption.value === "Sign Up" ? 0 : -200,
         ...ANIMATION_CONFIG
     })
 }
 
-onMounted(() => {
-    initializeAnimations();
-});
-
 watch(selectedOption, () => {
     animateMask()
     animateTitles()
 });
+
+onMounted(() => {
+    initializeAnimations();
+});
 </script>
 
 <style lang="css" scoped>
-@import url("~/assets/css/transparent-section.css");
-@import url("~/assets/css/green-link.css");
-
-@import url("~/assets/css/form/input.css");
-@import url("~/assets/css/form/button.css");
-@import url("~/assets/css/form/message.css");
-
-
-.gradient-background {
+.main {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100vw;
+    height: 100vh;
 }
 
-.transparent-section {
-    max-width: 250px;
-    width: 100%;
-}
-
-.transparent-section__title {
+.header__title {
     position: absolute;
     inset: 0;
 }
 
-.transparent-section__title:nth-child(even) {
+.header__title:nth-child(even) {
     opacity: 0;
 }
 
-.transparent-section__container {
-    background-color: rgb(255, 255, 255, 0.2);
+.container {
+    background-color: var(--transparent-white);
     display: flex;
-    align-items: center;
-    justify-content: center;
     border-radius: 0.5rem;
     position: relative;
 }
@@ -177,7 +179,6 @@ watch(selectedOption, () => {
     width: 100vw;
     z-index: 1;
     cursor: pointer;
-    transition: color 0.3ms;
     font-weight: 600;
 
     &:disabled:hover {
@@ -190,35 +191,13 @@ watch(selectedOption, () => {
     content: "";
     top: 0;
     left: 0;
-    background-color: rgba(0, 255, 179, 0.7);
+    background-color: var(--transparent-lime);
     width: 50%;
     height: 100%;
     border-radius: 0.5rem;
 }
 
-.transparent-section__form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.transparent-section__homeLink {
-    background-color: rgba(0, 255, 179, 0.7);
-    color: inherit;
-    padding: 0.8rem;
-    border: none;
-    border-radius: 0.5rem;
-    transition: all 0.3s;
-    cursor: pointer;
-    text-decoration: none;
-    text-align: center;
-
-    &:hover {
-        background-color: rgb(255, 255, 255, 0.2);
-    }
-}
-
-.section__separator {
+.separator {
     display: flex;
     flex-direction: row;
     gap: 0.5rem;
@@ -229,15 +208,15 @@ watch(selectedOption, () => {
 .separator__line {
     width: 100%;
     height: 2px;
-    background-color: rgb(255, 255, 255, 0.2);
+    background-color: var(--transparent-white);
 }
 
 .separator__span {
-    color: rgb(255, 255, 255, 0.2);
+    color: var(--transparent-white);
     text-transform: uppercase;
 }
 
-.section__oAuth {
+.oAuth {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -246,7 +225,7 @@ watch(selectedOption, () => {
 }
 
 .oAuth__button {
-    background-color: rgb(255, 255, 255, 0.2);
+    background-color: var(--transparent-gray);
     border: none;
     border-radius: 0.5rem;
     padding: 1rem;
@@ -259,7 +238,7 @@ watch(selectedOption, () => {
     cursor: pointer;
 
     &:hover {
-        background-color: rgba(0, 255, 179, 0.7);
+        background-color: var(--transparent-lime);
     }
 
     &:disabled {
@@ -267,7 +246,7 @@ watch(selectedOption, () => {
     }
 
     &:disabled:hover {
-        background-color: rgb(255, 255, 255, 0.2);
+        background-color: var(--transparent-white);
     }
 }
 
