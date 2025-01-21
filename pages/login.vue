@@ -71,11 +71,11 @@ const formState = reactive({
 const formInputs: FormProps["inputs"] = [
     {
         attributes: { type: "email", placeholder: "Insert email" },
-        vModel: { value: formState.email, updateValue: (value: string) => formState.email = value }
+        vModel: { value: formState.email, updateValue: (value) => formState.email = value }
     },
     {
         attributes: { type: "password", placeholder: "Insert password" },
-        vModel: { value: formState.password, updateValue: (value: string) => formState.password = value }
+        vModel: { value: formState.password, updateValue: (value) => formState.password = value }
     }
 ];
 
