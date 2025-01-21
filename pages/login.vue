@@ -14,7 +14,7 @@
                     <div class="container__mask" ref="maskRef" />
                 </div>
                 <Form :submit-func="submitForm" :loading="loading" :inputs="formInputs" />
-                <UiLink href="/reset-password">
+                <UiLink href="/request-reset">
                     Request password reset
                 </UiLink>
                 <div class="separator">
