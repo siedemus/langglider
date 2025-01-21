@@ -19,9 +19,9 @@ watch(user, () => {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: rgb(0, 255, 179);
+    color: var(--lime);
     font-weight: 800;
-    text-shadow: 0 0 10px rgba(0, 255, 179, 0.7);
+    text-shadow: var(--shadow-lime);
     font-size: 2rem;
 }
 </style>
