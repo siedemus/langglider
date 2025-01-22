@@ -26,7 +26,7 @@ const password = ref("")
 const inputs: FormProps["inputs"] = [
     {
         attributes: { type: "password", placeholder: "Insert password" },
-        vModel: { value: password.value, updateValue: (value) => password.value = value }
+        data: { value: password.value, updateValue: (value) => password.value = value }
     }
 ]
 

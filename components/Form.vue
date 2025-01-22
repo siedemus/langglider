@@ -1,7 +1,7 @@
 <template>
     <form class="form" @submit.prevent="submitFunc">
         <input class="form__input" :disabled="loading" v-for="input in inputs" v-bind="input.attributes"
-            v-model="input.vModel.value" @input="updateModelValue($event, input)" />
+            v-model="input.data.value" @input="updateModelValue($event, input)" />
         <button class="form__button" :disabled="loading" type="submit">{{ loading ? "Processing..." :
             "Submit"
             }}</button>
@@ -16,7 +16,7 @@ export interface FormProps {
     loading: boolean,
     inputs: {
         attributes: InputHTMLAttributes,
-        vModel: {
+        data: {
             value: string,
             updateValue: (value: string) => void
         }
@@ -25,7 +25,7 @@ export interface FormProps {
 
 const updateModelValue = (event: Event, input: FormProps["inputs"][number]) => {
     const value = (event.target as HTMLInputElement).value;
-    input.vModel.updateValue(value)
+    input.data.updateValue(value)
 }
 
 const { submitFunc, loading, inputs } = defineProps<FormProps>();
@@ -42,16 +42,15 @@ const { submitFunc, loading, inputs } = defineProps<FormProps>();
     border-radius: 0.5rem;
     border: none;
     padding: 0.8rem;
-    background-color: rgb(255, 255, 255, 0.2);
+    background-color: var(--transparent-gray);
     color: white;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
 
     &::placeholder {
-        color: rgba(255, 255, 255, 0.5);
+        color: var(--transparent-white);
     }
 
     &:disabled {
-        background-color: rgb(255, 255, 255, 0.4);
+        background-color: var(--transparent-white);
     }
 
     &:disabled:hover {
@@ -60,7 +59,7 @@ const { submitFunc, loading, inputs } = defineProps<FormProps>();
 }
 
 .form__button {
-    background-color: rgba(0, 255, 179, 0.7);
+    background-color: var(--transparent-lime);
     color: inherit;
     padding: 0.8rem;
     border: none;
@@ -69,12 +68,12 @@ const { submitFunc, loading, inputs } = defineProps<FormProps>();
     cursor: pointer;
 
     &:disabled:hover {
-        background-color: rgba(0, 255, 179, 0.7);
+        background-color: var(--transparent-lime);
         cursor: not-allowed;
     }
 
     &:hover {
-        background-color: rgb(255, 255, 255, 0.2);
+        background-color: var(--transparent-gray);
     }
 }
 </style>

@@ -23,7 +23,7 @@ const email = ref("");
 const inputs: FormProps["inputs"] = [
     {
         attributes: { type: "email", placeholder: "Insert email" },
-        vModel: { value: email.value, updateValue: (value) => email.value = value }
+        data: { value: email.value, updateValue: (value) => email.value = value }
     }
 ]
 
