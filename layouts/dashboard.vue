@@ -16,8 +16,16 @@
             </div>
             <DashboardCategoryLabel>Flashcard Sets</DashboardCategoryLabel>
             <div class="sidebar__group">
-                <DashboardLink v-for="set of tempData" :key="set.id" :href="`/dashboard/${set.id}`">{{ set.name }}
-                </DashboardLink>
+                <template v-if="userStore.loading">
+                    <SkeletonsLink />
+                    <SkeletonsLink />
+                    <SkeletonsLink />
+                </template>
+                <template v-else>
+                    <DashboardLink v-for="set of userStore.data.sets" :key="set.id" :href="`/dashboard/${set.id}`">{{
+                        set.name }}
+                    </DashboardLink>
+                </template>
             </div>
         </nav>
         <slot />
@@ -25,28 +33,7 @@
 </template>
 
 <script setup lang="ts">
-const tempData = [
-    {
-        id: '1',
-        name: 'Basic Spanish Phrases',
-        user_id: 'user123'
-    },
-    {
-        id: '2',
-        name: 'Common French Verbs',
-        user_id: 'user123'
-    },
-    {
-        id: '3',
-        name: 'Japanese Hiragana',
-        user_id: 'user123'
-    },
-    {
-        id: '4',
-        name: 'German Vocabulary',
-        user_id: 'user123'
-    }
-]
+const userStore = useUserStore();
 
 const isSidebarOpen = ref(false)
 const switchSidebarOpen = () => isSidebarOpen.value = !isSidebarOpen.value
@@ -93,7 +80,7 @@ const handleSidebarClose = () => isSidebarOpen.value = false
 .sidebar {
     background-color: var(--dark);
     height: 100vh;
-    width: 250px;
+    min-width: 250px;
     border-right: 1.5px solid var(--transparent-white);
     position: fixed;
     z-index: 1;
