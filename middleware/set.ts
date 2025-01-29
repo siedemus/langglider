@@ -2,7 +2,7 @@ import { getActivePinia } from "pinia";
 
 export default defineNuxtRouteMiddleware(async () => {
     const pinia = getActivePinia()
-    const setStore = useSetStore(pinia);
+    const setStore = useUserStore(pinia);
     const supabase = useSupabaseClient();
 
     const { data: { user }, error } = await supabase.auth.getUser();
@@ -13,7 +13,7 @@ export default defineNuxtRouteMiddleware(async () => {
     }
 
     await useAsyncData("setStoreInit", async () => {
-        await setStore.fetchSets()
+        await setStore.fetchUserData()
         return true
     })
 })

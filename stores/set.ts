@@ -17,24 +17,45 @@ export interface SetWithFlashcards extends Set {
     flashcards: Flashcard[];
 };
 
-export const useSetStore = defineStore("Set", () => {
-    const data = ref<SetWithFlashcards[]>([]);
+export interface Review {
+    id: string;
+    user_id: string;
+    since: string;
+    last: string;
+}
+
+export interface UserData {
+    sets: SetWithFlashcards[];
+    review: Review | null
+}
+
+export const useUserStore = defineStore("Set", () => {
+    let data = reactive<UserData>({ sets: [], review: null });
     const loading = ref(false);
     const error = ref<string | null>(null);
     const supabase = useSupabaseClient();
 
-    const fetchSets = async () => {
+    const fetchUserData = async () => {
         loading.value = true;
         error.value = null;
 
-        const { data: fetchedData, error: fetchingError } = await supabase.from("flashcard_set").select("*,flashcards:flashcard(*)");
+        const { data: setData, error: setError } = await supabase.from("flashcard_set").select("*, flashcards:flashcard(*)");
 
-        if (fetchingError) {
-            error.value = fetchingError.message;
+        if (setError) {
+            error.value = setError.message;
             return;
         }
 
-        data.value = fetchedData || [];
+        const { data: reviewData, error: reviewError } = await supabase.from("review").select("*");
+
+        if (reviewError) {
+            error.value = reviewError.message;
+            return;
+        }
+
+        data.review = reviewData[0] || null;
+        data.sets = setData || [];
+
         loading.value = false;
     };
 
@@ -43,10 +64,10 @@ export const useSetStore = defineStore("Set", () => {
         loading,
         error,
         supabase,
-        fetchSets
-    }
+        fetchUserData,
+    } as const;
 })
 
 if (import.meta.hot) {
-    import.meta.hot.accept(acceptHMRUpdate(useSetStore, import.meta.hot))
+    import.meta.hot.accept(acceptHMRUpdate(useUserStore, import.meta.hot))
 }
