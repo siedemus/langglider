@@ -5,7 +5,10 @@
 </template>
 
 <script setup lang="ts">
-definePageMeta({
-    middleware: ["set"]
-})
+const userStore = useUserStore();
+
+await useAsyncData("setStoreInit", async () => {
+    await userStore.fetchUserData()
+    return true
+});
 </script>
