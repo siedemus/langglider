@@ -19,9 +19,28 @@ const { error } = defineProps<PageContainerProps>()
     max-width: 100vw;
     width: 100%;
     height: 100vh;
-    overflow: auto;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     padding: 20px;
+
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: var(--transparent-white);
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: var(--white);
+        border-radius: 4px;
+        transition: all 300ms ease;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: var(--transparent-gray);
+    }
 }
 </style>

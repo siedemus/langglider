@@ -10,11 +10,11 @@
                 LanGGlider
             </h2>
             <div class="sidebar__group">
-                <DashboardLink href="/dashboard">Dashboard</DashboardLink>
-                <DashboardLink href="/dashboard/create">Create Flashcards</DashboardLink>
-                <DashboardLink :special="true" href="/dashboard/create-ai">Create AI Flashcards</DashboardLink>
+                <LayoutLink href="/dashboard">Dashboard</LayoutLink>
+                <LayoutLink href="/dashboard/create">Create Flashcards</LayoutLink>
+                <LayoutLink :special="true" href="/dashboard/create-ai">Create AI Flashcards</LayoutLink>
             </div>
-            <DashboardCategoryLabel>Flashcard Sets</DashboardCategoryLabel>
+            <LayoutCategoryLabel>Flashcard Sets</LayoutCategoryLabel>
             <div class="sidebar__group">
                 <template v-if="userStore.loading">
                     <SkeletonsLink />
@@ -22,9 +22,9 @@
                     <SkeletonsLink />
                 </template>
                 <template v-else>
-                    <DashboardLink v-for="set of userStore.data.sets" :key="set.id" :href="`/dashboard/${set.id}`">{{
+                    <LayoutLink v-for="set of userStore.data.sets" :key="set.id" :href="`/dashboard/${set.id}`">{{
                         set.name }}
-                    </DashboardLink>
+                    </LayoutLink>
                 </template>
             </div>
         </nav>
@@ -80,7 +80,8 @@ const handleSidebarClose = () => isSidebarOpen.value = false
 .sidebar {
     background-color: var(--dark);
     height: 100vh;
-    min-width: 250px;
+    max-width: 250px;
+    width: 100%;
     border-right: 1.5px solid var(--transparent-white);
     position: fixed;
     z-index: 1;

@@ -23,6 +23,10 @@ const { href, special } = defineProps<LinkProps>()
     text-decoration: none;
     font-weight: 600;
     transition: all 300ms ease;
+    max-width: 220px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     &:hover {
         background-color: var(--transparent-white);
