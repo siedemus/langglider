@@ -7,7 +7,9 @@
     <div class="page-wrapper">
         <nav class="sidebar" :class="{ 'sidebar--open': isSidebarOpen }" @touchmove.left="handleSidebarClose">
             <h2 class="sidebar__subheader">
-                LanGGlider
+                <NuxtLink to="/">
+                    LanGGlider
+                </NuxtLink>
             </h2>
             <div class="sidebar__group">
                 <LayoutLink href="/dashboard">Dashboard</LayoutLink>
@@ -28,7 +30,9 @@
                 </template>
             </div>
         </nav>
-        <slot />
+        <div class="page-container">
+            <slot />
+        </div>
     </div>
 </template>
 
@@ -52,8 +56,8 @@ const handleSidebarClose = () => isSidebarOpen.value = false
     border: 2px solid var(--transparent-white);
     height: 40px;
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 5px;
+    right: 5px;
     cursor: pointer;
     z-index: 1;
 
@@ -102,11 +106,45 @@ const handleSidebarClose = () => isSidebarOpen.value = false
     margin: 0 0 15px;
     padding: 15px 0 15px 15px;
     border-bottom: 1.5px solid var(--transparent-white);
+
+    & a {
+        text-decoration: none;
+        color: inherit;
+    }
 }
 
 .sidebar__group {
     display: flex;
     flex-direction: column;
     gap: 15px;
+}
+
+.page-container {
+    background-color: var(--transparent-dark);
+    max-width: 100vw;
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: var(--transparent-white);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--white);
+        border-radius: 4px;
+        transition: all 300ms ease;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: var(--transparent-gray);
+    }
 }
 </style>
