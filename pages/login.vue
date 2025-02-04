@@ -1,6 +1,6 @@
 <template>
     <main class="main">
-        <UiTransparentContainer v-if="!isAuthenticated">
+        <CommonTransparentContainer v-if="!isAuthenticated">
             <template #header>
                 <span class="header__title" ref="joinUsRef">Join Us Today!</span>
                 <span class="header__title" ref="welcomeRef">Welcome Back!</span>
@@ -13,10 +13,10 @@
                     </button>
                     <div class="container__mask" ref="maskRef" />
                 </div>
-                <Form :submit-func="submitForm" :loading="loading" :inputs="formInputs" />
-                <UiLink href="/request-reset">
+                <CommonForm :submit-func="submitForm" :loading="loading" :inputs="formInputs" />
+                <CommonLink to="/request-reset">
                     Request password reset
-                </UiLink>
+                </CommonLink>
                 <div class="separator">
                     <div class="separator__line" />
                     <span class="separator__span">or</span>
@@ -28,24 +28,24 @@
                         <img class="oAuth__image" :src="url" />
                     </button>
                 </div>
-                <UiMessageBox variant="Success" v-if="message">{{ message }}</UiMessageBox>
-                <UiMessageBox variant="Error" v-if="errorMessage">{{ errorMessage }}</UiMessageBox>
+                <CommonMessageBox variant="Success" v-if="message">{{ message }}</CommonMessageBox>
+                <CommonMessageBox variant="Error" v-if="errorMessage">{{ errorMessage }}</CommonMessageBox>
             </template>
-        </UiTransparentContainer>
-        <UiTransparentContainer v-else>
+        </CommonTransparentContainer>
+        <CommonTransparentContainer v-else>
             <template #header>
                 You are already logged in.
             </template>
             <template #content>
-                <UiButtonLink href="/">Go to Home</UiButtonLink>
+                <CommonButtonLink href="/">Go to Home</CommonButtonLink>
             </template>
-        </UiTransparentContainer>
+        </CommonTransparentContainer>
     </main>
 </template>
 
 <script setup lang="ts">
 import { LOGIN_ANIMATION_CONFIG as ANIMATION_CONFIG } from 'assets/const/animationConfigs';
-import type { FormProps } from '~/components/Form.vue';
+import type { FormProps } from '~/components/common/form.vue';
 import { oAuthOptions } from '~/assets/const/oAuthOptions';
 import { options } from '~/assets/const/authOptions';
 import { gsap } from 'gsap';

@@ -1,19 +1,17 @@
 <template>
-    <DashboardPageContainer :error="setStore.error">
-        <template #content>
-                <DashboardStreak :data="setStore.data" :loading="setStore.loading" />
-        </template>
-        <template #error>
-            error
-        </template>
-    </DashboardPageContainer>
+    <template v-if="!userStore.error">
+        <DashboardStreak :data="userStore.data" :loading="userStore.loading" />
+    </template>
+    <template v-else>
+        <CommonMessageBox variant="Error">
+            {{ userStore.error }}
+        </CommonMessageBox>
+    </template>
 </template>
 
 <script setup lang="ts">
-const setStore = useUserStore();
+const userStore = useUserStore();
 
 </script>
 
-<style lang="css" scoped>
-
-</style>
+<style lang="css" scoped></style>

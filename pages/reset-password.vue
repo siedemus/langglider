@@ -1,21 +1,21 @@
 <template>
     <main class="main">
-        <UiTransparentContainer>
+        <CommonTransparentContainer>
             <template #header>
                 {{ expired ? 'Request Expired!' : 'Update your Password' }}
             </template>
             <template #content>
-                <Form v-if="!expired" :loading="loading" :submit-func="submitForm" :inputs="inputs" />
-                <UiLink href="/">Go to Home</UiLink>
-                <UiMessageBox variant="Success" v-if="message">{{ message }}</UiMessageBox>
-                <UiMessageBox variant="Error" v-if="errorMessage">{{ errorMessage }}</UiMessageBox>
+                <CommonForm v-if="!expired" :loading="loading" :submit-func="submitForm" :inputs="inputs" />
+                <CommonLink to="/">Go to Home</CommonLink>
+                <CommonMessageBox variant="Success" v-if="message">{{ message }}</CommonMessageBox>
+                <CommonMessageBox variant="Error" v-if="errorMessage">{{ errorMessage }}</CommonMessageBox>
             </template>
-        </UiTransparentContainer>
+        </CommonTransparentContainer>
     </main>
 </template>
 
 <script setup lang="ts">
-import type { FormProps } from '~/components/Form.vue';
+import type { FormProps } from '~/components/common/form.vue';
 
 const route = useRoute();
 const expired = route.query.error_code as string === "otp_expired"

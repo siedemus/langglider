@@ -8,7 +8,11 @@
 </template>
 
 <script setup lang="ts">
-const { variant } = defineProps<{ variant?: "Error" | "Success" }>()
+interface MessageBoxProps {
+    variant?: "Error" | "Success"
+}
+
+const { variant } = defineProps<MessageBoxProps>()
 </script>
 
 <style lang="css" scoped>

@@ -1,7 +1,7 @@
 <template>
     <article class="streak-container">
         <div class="streak-container__loader" v-if="loading">
-            <UiLoader />
+            <CommonLoader />
         </div>
         <div class="streak-container__content" v-else>
             <img :src="streakImage" class="content__image" v-if="hasStreak" />

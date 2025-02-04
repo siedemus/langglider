@@ -3,32 +3,32 @@
         <main class="main">
             <h1 class="main__header">LanGGlider</h1>
             <h2 class="main__subheader">Accelerate Your Language Learning Journey.</h2>
-            <UiButtonLink href="/dashboard" maxWidth="150">Get Started</UiButtonLink>
+            <CommonButtonLink to="/dashboard" class="main__button-link">Get Started</CommonButtonLink>
         </main>
         <section class="about">
             <div class="about__container">
                 <div class="container__splitter">
-                    <UiTile v-for="tile in splitterTiles1" :key="tile.header" :header="tile.header">
+                    <CommonTile v-for="tile in splitterTiles1" :key="tile.header" :header="tile.header">
                         {{ tile.content }}
-                    </UiTile>
+                    </CommonTile>
                 </div>
-                <UiTile v-for="tile in singleTiles" :key="tile.header" :header="tile.header">
+                <CommonTile v-for="tile in singleTiles" :key="tile.header" :header="tile.header">
                     {{ tile.content }}
-                </UiTile>
+                </CommonTile>
                 <div class="container__splitter">
-                    <UiTile v-for="tile in splitterTiles2" :key="tile.header" :header="tile.header">
+                    <CommonTile v-for="tile in splitterTiles2" :key="tile.header" :header="tile.header">
                         {{ tile.content }}
-                    </UiTile>
+                    </CommonTile>
                 </div>
-                <UiTile v-for="tile in splitterTiles1" :key="tile.header" :header="tile.header">
+                <CommonTile v-for="tile in splitterTiles1" :key="tile.header" :header="tile.header">
                     {{ tile.content }}
-                </UiTile>
-                <UiTile v-for="tile in singleTiles" :key="tile.header" :header="tile.header">
+                </CommonTile>
+                <CommonTile v-for="tile in singleTiles" :key="tile.header" :header="tile.header">
                     {{ tile.content }}
-                </UiTile>
-                <UiTile v-for="tile in splitterTiles2" :key="tile.header" :header="tile.header">
+                </CommonTile>
+                <CommonTile v-for="tile in splitterTiles2" :key="tile.header" :header="tile.header">
                     {{ tile.content }}
-                </UiTile>
+                </CommonTile>
             </div>
         </section>
     </div>
@@ -115,6 +115,12 @@ const splitterTiles2 = [
     margin: 0;
     font-size: clamp(1rem, 15vw, 1.4rem);
     font-weight: 800;
+}
+
+.main__button-link {
+    margin-top: 15px;
+    box-shadow: var(--shadow-white);
+    font-size: 1.4rem;
 }
 
 .about {
