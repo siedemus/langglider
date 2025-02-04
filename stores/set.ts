@@ -4,6 +4,7 @@ export interface Set {
     id: string;
     name: string;
     user_id: string;
+    lastReview: string | null
 };
 
 export interface Flashcard {
@@ -20,8 +21,7 @@ export interface SetWithFlashcards extends Set {
 export interface Review {
     id: string;
     user_id: string;
-    since: string;
-    last: string;
+    since: string | null;
 }
 
 export interface UserData {
@@ -59,12 +59,34 @@ export const useUserStore = defineStore("Set", () => {
         loading.value = false;
     };
 
+    const getSetById = computed(() => {
+        return (id: string) => data.sets.find(set => set.id === id)
+    })
+
+    const deleteSet = async (id: string) => {
+        loading.value = true;
+        error.value = null;
+
+        const { error: deleteError } = await supabase.from("flashcard_set").delete().eq("id", id);
+
+        if (deleteError) {
+            error.value = deleteError.message;
+            loading.value = false;
+            return;
+        }
+
+        data.sets = data.sets.filter(set => set.id !== id);
+        loading.value = false;
+    }
+
     return {
         data,
         loading,
         error,
         supabase,
         fetchUserData,
+        getSetById,
+        deleteSet
     } as const;
 })
 
