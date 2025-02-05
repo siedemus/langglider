@@ -35,7 +35,7 @@ const { hasStreak, dayStreak, countdown, displayCountdown } = useStreak(data)
 .streak-container {
     background-color: var(--dark);
     width: 100%;
-    min-height: 200px;
+    min-height: fit-content;
     border-radius: 7px;
     border: 1px solid var(--transparent-white);
     padding: 15px;
