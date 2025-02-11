@@ -8,7 +8,7 @@
             <template #content>
                 <div class="container">
                     <button class="container__button" :disabled="loading" v-for="option in options"
-                        @click="selectOption(option)">
+                        @click="selectOption(option)" :key="option">
                         {{ option }}
                     </button>
                     <div class="container__mask" ref="maskRef" />
@@ -24,7 +24,7 @@
                 </div>
                 <div class="oAuth">
                     <button class="oAuth__button" :disabled="loading" v-for="(url, provider) in oAuthOptions"
-                        @click="signInWithOAuth(provider)">
+                        @click="signInWithOAuth(provider)" :key="provider">
                         <img class="oAuth__image" :src="url" />
                     </button>
                 </div>

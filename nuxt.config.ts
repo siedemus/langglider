@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  modules: ['@nuxtjs/supabase', "@nuxtjs/google-fonts", "@pinia/nuxt"],
+  modules: ['@nuxtjs/supabase', "@nuxtjs/google-fonts", "@pinia/nuxt", "vue-sonner/nuxt"],
   app: {
     head: {
       link: [{ rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" }]
