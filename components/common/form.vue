@@ -1,7 +1,7 @@
 <template>
     <form class="form" @submit.prevent="submitFunc">
         <input class="form__input" :disabled="loading" v-for="input in inputs" v-bind="input.attributes"
-            v-model="input.data.value" @input="updateModelValue($event, input)" />
+            v-model="input.data.value" @input="updateModelValue($event, input)" :key="input.attributes.placeholder" />
         <button class="form__button" :disabled="loading" type="submit">{{ loading ? "Processing..." :
             "Submit"
             }}</button>

@@ -42,7 +42,7 @@ const handleClick = () => {
     cursor: pointer;
 
     &:hover {
-        transform: scale(1.1) translateY(-1px);
+        transform: translateY(-2px);
     }
 }
 </style>

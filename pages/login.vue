@@ -37,7 +37,7 @@
                 You are already logged in.
             </template>
             <template #content>
-                <CommonButtonLink href="/">Go to Home</CommonButtonLink>
+                <CommonButtonLink to="/">Go to Home</CommonButtonLink>
             </template>
         </CommonTransparentContainer>
     </main>
