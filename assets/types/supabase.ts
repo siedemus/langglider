@@ -1,3 +1,6 @@
+export type DatabaseSet = Database["public"]["Tables"]["sets"]["Row"];
+export type DatabaseReview = Database["public"]["Tables"]["reviews"]["Row"];
+
 export type Database = {
   public: {
     Tables: {
