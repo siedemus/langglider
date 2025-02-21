@@ -1,10 +1,10 @@
 <template>
-    <form class="form" @submit.prevent="submitFunc">
+    <form class="form" @submit.prevent="$emit('preventedSubmit')">
         <input class="form__input" :disabled="loading" v-for="input in inputs" v-bind="input.attributes"
-            v-model="input.data.value" @input="updateModelValue($event, input)" :key="input.attributes.placeholder" />
-        <button class="form__button" :disabled="loading" type="submit">{{ loading ? "Processing..." :
-            "Submit"
-            }}</button>
+            v-model="input.data.value" @input="updateValue($event, input)" :key="input.attributes.placeholder" />
+        <button class="form__button" :disabled="loading" type="submit">
+            {{ loading ? "Processing..." : "Submit" }}
+        </button>
     </form>
 </template>
 
@@ -12,23 +12,26 @@
 import type { InputHTMLAttributes } from 'vue';
 
 export interface FormProps {
-    submitFunc: (() => void) | (() => Promise<void>),
     loading: boolean,
     inputs: {
-        attributes: InputHTMLAttributes,
+        attributes: InputHTMLAttributes & { placeholder: string },
         data: {
             value: string,
-            updateValue: (value: string) => void
+            updateValue: (value: string) => void;
         }
     }[],
-}
+};
+interface FormEmits {
+    preventedSubmit: [],
+};
 
-const updateModelValue = (event: Event, input: FormProps["inputs"][number]) => {
+const { loading, inputs } = defineProps<FormProps>();
+defineEmits<FormEmits>();
+
+const updateValue = (event: Event, input: FormProps["inputs"][number]) => {
     const value = (event.target as HTMLInputElement).value;
     input.data.updateValue(value)
-}
-
-const { submitFunc, loading, inputs } = defineProps<FormProps>();
+};
 </script>
 
 <style lang="css" scoped>

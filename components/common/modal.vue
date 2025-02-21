@@ -5,10 +5,10 @@
                 <slot></slot>
             </p>
             <div class="modal__button-container">
-                <CommonButtonLink @click="dedicatedFunction">
+                <CommonButtonLink @click="$emit('confirm')">
                     Yes
                 </CommonButtonLink>
-                <CommonButtonLink @click="switchModal(false)">
+                <CommonButtonLink @click="$emit('update:showModal', false)">
                     No
                 </CommonButtonLink>
             </div>
@@ -19,11 +19,15 @@
 <script setup lang="ts">
 interface ModalProps {
     showModal: boolean;
-    switchModal: (value: boolean) => void;
-    dedicatedFunction: () => Promise<any>;
 }
 
-const { showModal, switchModal, dedicatedFunction } = defineProps<ModalProps>()
+interface ModalEmits {
+    "confirm": []
+    "update:showModal": [value: boolean]
+}
+
+defineProps<ModalProps>()
+defineEmits<ModalEmits>()
 </script>
 
 <style lang="css" scoped>
@@ -53,6 +57,8 @@ const { showModal, switchModal, dedicatedFunction } = defineProps<ModalProps>()
     font-size: 1.5rem;
     font-weight: 600;
     text-align: center;
+    word-break: break-all;
+    margin: 10px 0 15px;
 }
 
 .modal__button-container {
@@ -60,6 +66,6 @@ const { showModal, switchModal, dedicatedFunction } = defineProps<ModalProps>()
     justify-content: center;
     align-items: center;
     padding: 10px 0;
-    gap: 15px;
+    gap: 10px;
 }
 </style>

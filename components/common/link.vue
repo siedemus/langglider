@@ -1,4 +1,4 @@
-<template>CommonLink href=
+<template>
     <NuxtLink :to="to" class="link">
         <slot />
     </NuxtLink>
@@ -7,9 +7,9 @@
 <script setup lang="ts">
 interface LinkProps {
     to: string
-}
+};
 
-const { to } = defineProps<LinkProps>()
+const { to } = defineProps<LinkProps>();
 </script>
 
 <style lang="css" scoped>

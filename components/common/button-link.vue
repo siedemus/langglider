@@ -1,5 +1,5 @@
 <template>
-    <component :is="componentType" v-bind="linkProps" @click="handleClick" class="button-link">
+    <component class="button-link" :is="componentType" v-bind="linkProps" @click="$emit('click')">
         <slot />
     </component>
 </template>
@@ -7,22 +7,17 @@
 <script setup lang="ts">
 interface ButtonLinkProps {
     to?: string;
+    disabled?: boolean
 };
+interface ButtonLinkEmits {
+    click: [];
+}
 
-const { to } = defineProps<ButtonLinkProps>();
-const componentType = computed(() => {
-    if (to) return defineNuxtLink({})
-    return "button";
-});
-const linkProps = computed(() => {
-    if (to) return { to };
-    return {};
-});
+const { to, disabled } = defineProps<ButtonLinkProps>();
+defineEmits<ButtonLinkEmits>();
 
-const emit = defineEmits(["click"]);
-const handleClick = () => {
-    emit("click");
-};
+const componentType = computed(() => to ? defineNuxtLink({}) : "button");
+const linkProps = computed(() => to ? { to } : { disabled });
 </script>
 
 <style lang="css" scoped>
@@ -36,13 +31,23 @@ const handleClick = () => {
     overflow: hidden;
     text-overflow: ellipsis;
     border-radius: 0.3rem;
-    transition: all 300ms ease;
+    transition: all 0.3s ease-in-out;
     font-weight: 600;
     text-align: center;
+    font-size: 1rem;
     cursor: pointer;
 
     &:hover {
         transform: translateY(-2px);
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        filter: brightness(70%);
+    }
+
+    &:disabled:hover {
+        transform: translateY(0);
     }
 }
 </style>
