@@ -74,3 +74,13 @@ body::before {
     transform: translate(25%, 25%);
   }
 }
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}

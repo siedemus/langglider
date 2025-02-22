@@ -40,14 +40,4 @@ const props = withDefaults(defineProps<SkeletonProps>(), {
             var(--transparent-gray) 100%);
     animation: shimmer 1.5s infinite;
 }
-
-@keyframes shimmer {
-    0% {
-        transform: translateX(-100%);
-    }
-
-    100% {
-        transform: translateX(100%);
-    }
-}
 </style>
