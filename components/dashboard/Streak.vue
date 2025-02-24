@@ -1,13 +1,13 @@
 <template>
-    <article class="streak-container">
-        <div class="streak-container__loader" v-if="loading">
-            <CommonLoader />
-        </div>
-        <div class="streak-container__content" v-else>
-            <img :src="streakImage" class="content__image" v-if="hasStreak" />
-            <img :src="sadImage" class="content__image" v-else />
+    <SkeletonsStreak v-if="loading" />
+    <article class="streak-container" v-else>
+        <div class="streak-container__content">
+            <img :src="streakImage" class="content__image" :alt="'Strak active for ' + dayStreak + ' days'"
+                v-if="hasStreak" />
+            <img :src="sadImage" class="content__image" alt="Streak broken" v-else />
             <div class="content__streak-info">
-                <p class="content__days"><span class="days__span">{{ dayStreak }}</span> Day
+                <p class="content__days"><span class="days__span">{{ dayStreak }}</span> {{ dayStreak === 1 ? 'Day' :
+                    'Days' }}
                     Streak!</p>
                 <p class="content__countdown" v-if="hasStreak">
                     <span class="countdown__span">{{ displayCountdown(countdown) }}</span> hours left to
@@ -28,7 +28,7 @@ import sadImage from "~/assets/images/sad.gif";
 interface StreakProps { data: UserData; loading: boolean }
 
 const { data, loading } = defineProps<StreakProps>()
-const { hasStreak, dayStreak, countdown, displayCountdown } = useStreak(data)
+const { hasStreak, dayStreak, countdown, displayCountdown } = useStreak(data);
 </script>
 
 <style lang="css" scoped>
@@ -58,7 +58,7 @@ const { hasStreak, dayStreak, countdown, displayCountdown } = useStreak(data)
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    height: 212px;
 }
 
 .content__image {
