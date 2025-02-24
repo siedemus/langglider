@@ -1,12 +1,12 @@
 <template>
     <ul class="flashcards">
-        <li class="flashcard" v-for="(flashcard, index) in set!.flashcards">
+        <li class="flashcard" v-for="(flashcard, index) in set.flashcards" :key="flashcard.id">
             <p class="flashcard__count">Card {{ index + 1 }}</p>
             <p class="flashcard__content"><span class="content__span">Front:</span>
                 {{ flashcard.front }}
             </p>
-            <p class="flashcard__content"><span class="content__span">Reverse:</span>
-                {{ flashcard.reverse }}
+            <p class="flashcard__content"><span class="content__span">Back:</span>
+                {{ flashcard.back }}
             </p>
         </li>
     </ul>
@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 interface SetListProps {
-    set: SetWithFlashcards;
+    set: TempFlashcardSet
 }
 
 const { set } = defineProps<SetListProps>();
@@ -46,6 +46,7 @@ const { set } = defineProps<SetListProps>();
     margin: 0;
     font-size: 1.5rem;
     padding: 0 0 10px 10px;
+    word-break: break-all;
 }
 
 .content__span {

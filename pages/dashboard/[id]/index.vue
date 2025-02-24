@@ -1,8 +1,5 @@
 <template>
-    <CommonMessageBox variant="Error" v-if="userStore.error">
-        {{ userStore }}
-    </CommonMessageBox>
-    <CommonMessageBox variant="Error" v-else-if="setError">
+    <CommonMessageBox variant="Error" v-if="setError">
         Set not found.
     </CommonMessageBox>
     <CommonMessageBox variant="Error" v-else-if="paramsError">
@@ -15,20 +12,20 @@
         <div class="content" v-else>
             <section class="content__topbar">
                 <CommonButtonLink :to="$route.path + '/play'">Play</CommonButtonLink>
-                <CommonButtonLink :to="$route.path + '/edit'">Edit</CommonButtonLink>
+                <CommonButtonLink :to="'/dashboard/create?edit=' + set!.id">Edit</CommonButtonLink>
                 <CommonButtonLink @click="switchModal(true)">Delete</CommonButtonLink>
             </section>
             <section class="content__set">
                 <h1 class="set__header">{{ set!.name }}</h1>
-                <p class="set__count">Flashcard: {{ set!.flashcards.length }}</p>
-                <p class="set__review">Reviewed: {{ formatDate(set!.lastReview) }}</p>
+                <p class="set__count">Flashcard: {{ (set!.flashcards as []).length }}</p>
+                <p class="set__review">Reviewed: {{ formatDate(set!.last_review) }}</p>
                 <template v-if="isNotEmpty">
                     <h2>Flashcards</h2>
                     <DashboardIdFlashcardsList :set="set!" />
                 </template>
             </section>
         </div>
-        <CommonModal :show-modal="showModal" :switch-modal="switchModal" :dedicated-function="deleteSet">
+        <CommonModal v-model:show-modal="showModal" @confirm="deleteSet">
             Do you really want to delete {{ set!.name }}?
         </CommonModal>
     </template>
@@ -41,7 +38,7 @@ const switchModal = (value: boolean) => showModal.value = value;
 const userStore = useUserStore();
 const route = useRoute();
 const set = userStore.getSetById(route.params.id as string);
-const isNotEmpty = set!.flashcards.length !== 0;
+const isNotEmpty = (set!.flashcards as []).length !== 0;
 const setError = set === undefined;
 const paramsError = typeof route.params.id !== "string";
 
@@ -89,6 +86,8 @@ const formatDate = (dateString: string | null) => {
     margin: 0 0 15px;
     font-weight: 800;
     font-size: 2.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .set__count {
