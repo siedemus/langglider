@@ -5,7 +5,7 @@
         <div class="sidebar-button__line" />
     </button>
     <div class="page-wrapper">
-        <nav class="sidebar" :class="{ 'sidebar--open': isSidebarOpen }" @touchmove.left="handleSidebarClose">
+        <nav class="sidebar" :class="{ 'sidebar--open': isSidebarOpen }">
             <h2 class="sidebar__subheader">
                 <NuxtLink to="/">
                     LanGGlider
@@ -89,8 +89,27 @@ const handleSidebarClose = () => isSidebarOpen.value = false
     border-right: 1.5px solid var(--transparent-white);
     position: fixed;
     z-index: 1;
+    overflow-y: auto;
     transform: translateX(-110%);
     transition: transform 0.3s ease;
+    
+    &::-webkit-scrollbar {
+        width: 2px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: var(--transparent-gray);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--transparent-white);
+        border-radius: 4px;
+        transition: all 300ms ease;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: var(--transparent-white);
+    }
 
     @media screen and (min-width: 1100px) {
         transform: translateX(0%);
@@ -117,6 +136,7 @@ const handleSidebarClose = () => isSidebarOpen.value = false
     display: flex;
     flex-direction: column;
     gap: 15px;
+    margin-bottom: 15px;
 }
 
 .page-container {
