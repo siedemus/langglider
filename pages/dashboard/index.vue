@@ -7,5 +7,3 @@
 const userStore = useUserStore();
 
 </script>
-
-<style lang="css" scoped></style>
