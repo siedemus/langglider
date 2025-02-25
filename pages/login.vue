@@ -13,7 +13,7 @@
                     </button>
                     <div class="container__mask" ref="maskRef" />
                 </div>
-                <CommonForm :submit-func="submitForm" :loading="loading" :inputs="formInputs" />
+                <CommonForm @prevented-submit="submitForm" :loading="loading" :inputs="formInputs" />
                 <CommonLink to="/request-reset">
                     Request password reset
                 </CommonLink>
