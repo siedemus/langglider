@@ -35,8 +35,9 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      appUrl: ""
-    }
+      appUrl: "",
+      apiUrl: "",
+    },
   },
 
   supabase: {
