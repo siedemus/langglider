@@ -21,7 +21,7 @@
                 <p class="set__review">Reviewed: {{ formatDate(set!.last_review) }}</p>
                 <template v-if="isNotEmpty">
                     <h2>Flashcards</h2>
-                    <DashboardIdFlashcardsList :set="set!" />
+                    <CommonFlashcardsList :set="set!" />
                 </template>
             </section>
         </div>
