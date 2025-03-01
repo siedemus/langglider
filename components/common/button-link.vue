@@ -5,9 +5,12 @@
 </template>
 
 <script setup lang="ts">
+import type { ButtonHTMLAttributes } from 'vue';
+
 interface ButtonLinkProps {
     to?: string;
-    disabled?: boolean
+    disabled?: boolean;
+    type?: ButtonHTMLAttributes["type"]
 };
 interface ButtonLinkEmits {
     click: [];
